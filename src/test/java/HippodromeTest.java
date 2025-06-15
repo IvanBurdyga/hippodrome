@@ -1,27 +1,24 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.mockito.Mockito;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class HippodromeTest {
 
     @ParameterizedTest
-    @EmptySource
-    @NullSource
-    void HippodromeConstructor(List<Horse> value) {
+    @NullAndEmptySource
+    void constructorHippodrome(List<Horse> value) {
         //when
         Throwable exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> {
-                    new Hippodrome(value);
-                }
+                () -> new Hippodrome(value)
         );
         //then
         if (value == null) {
@@ -36,7 +33,7 @@ class HippodromeTest {
         //given
         List<Horse> horses = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
-            Horse horse = Mockito.mock(Horse.class);
+            Horse horse = mock(Horse.class);
             horses.add(horse);
         }
         Hippodrome hippodrome = new Hippodrome(horses);
@@ -51,14 +48,14 @@ class HippodromeTest {
         //given
         List<Horse> horses = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            Horse horse = Mockito.mock(Horse.class);
+            Horse horse = mock(Horse.class);
             horses.add(horse);
         }
         Hippodrome hippodrome = new Hippodrome(horses);
         //when
         hippodrome.move();
         //then
-        hippodrome.getHorses().forEach(horse -> Mockito.verify(horse).move());
+        hippodrome.getHorses().forEach(horse -> verify(horse).move());
     }
 
     @Test
