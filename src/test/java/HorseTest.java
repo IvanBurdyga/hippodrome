@@ -33,8 +33,12 @@ class HorseTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "name,-1,1,",
-            "name,1,-1,",
+            "name,-71,5000.5,",
+            "name,60,-5050,",
+            "name,-61.9,-5050.5,",
+            "name,-59.6,2345,",
+            "name,66.6,-6666.6,",
+            "name,-81,-4965,",
     })
     void constructorHorse(String name, double speed, double distance) {
         Throwable exception = assertThrows(
@@ -80,12 +84,12 @@ class HorseTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0.2, 0.5, 0.7})
+    @ValueSource(doubles = {0.2, 0.33, 0.5, 0.69, 0.7})
     void move(double value) {
         //given
         Horse horse = new Horse(name, speed, distance);
         try (MockedStatic<Horse> horseMockedStatic = Mockito.mockStatic(Horse.class)) {
-            horseMockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9)).thenReturn(value);
+            horseMockedStatic.when(() -> Horse.getRandomDouble(0.2d, 0.9d)).thenReturn(value);
             //when
             horse.move();
             //then
