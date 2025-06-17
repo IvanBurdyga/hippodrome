@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class HorseTest {
 
     private final String name = "Horse";
-    private final double speed = 50.5;
+    private final double speed = 5.05;
     private final double distance = 500.5;
 
     @ParameterizedTest
@@ -33,12 +33,12 @@ class HorseTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "name,-71,5000.5,",
-            "name,60,-5050,",
-            "name,-61.9,-5050.5,",
-            "name,-59.6,2345,",
-            "name,66.6,-6666.6,",
-            "name,-81,-4965,",
+            "name,-1,5000.5,",
+            "name,6,-5050,",
+            "name,-6.9,-5050.5,",
+            "name,-5.6,2345,",
+            "name,6.6,-6666.6,",
+            "name,-8,-4965,",
     })
     void constructorHorse(String name, double speed, double distance) {
         Throwable exception = assertThrows(
@@ -89,11 +89,11 @@ class HorseTest {
         //given
         Horse horse = new Horse(name, speed, distance);
         try (MockedStatic<Horse> horseMockedStatic = Mockito.mockStatic(Horse.class)) {
-            horseMockedStatic.when(() -> Horse.getRandomDouble(0.2d, 0.9d)).thenReturn(value);
+            horseMockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9)).thenReturn(value);
             //when
             horse.move();
             //then
-            horseMockedStatic.verify(() -> Horse.getRandomDouble(0.2d, 0.9d));
+            horseMockedStatic.verify(() -> Horse.getRandomDouble(0.2, 0.9));
             assertEquals(distance + speed * value, horse.getDistance());
         }
     }

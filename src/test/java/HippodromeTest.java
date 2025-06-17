@@ -62,15 +62,15 @@ class HippodromeTest {
     void getWinner() {
         //given
         List<Horse> horses = new ArrayList<>();
-        Horse winner = new Horse("winner", 76,7000.5);
+        Horse winner = new Horse("winner", 7.6,7000.5);
         horses.add(winner);
-        Horse horse1 = new Horse("horse1", 60,4567.89456);
+        Horse horse1 = new Horse("horse1", 6.0,4567.89456);
         horses.add(horse1);
-        Horse horse2 = new Horse("horse2", 62,2568.5548);
+        Horse horse2 = new Horse("horse2", 6.2,2568.5548);
         horses.add(horse2);
-        Horse horse3 = new Horse("horse3", 71,2000);
+        Horse horse3 = new Horse("horse3", 7.1,2000);
         horses.add(horse3);
-        Horse horse4 = new Horse("horse4", 68,2222.22);
+        Horse horse4 = new Horse("horse4", 6.8,2222.22);
         horses.add(horse4);
         Hippodrome hippodrome = new Hippodrome(horses);
         //when
